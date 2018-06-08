@@ -2,7 +2,8 @@ pipeline {
     agent any
     tools { 
         maven 'm3' 
-        jdk 'jdk10' 
+        jdk 'jdk10'
+        fossa 'fossa'
     }
     stages {
         stage ('Initialize') {
@@ -16,7 +17,18 @@ pipeline {
 
         stage ('Build') {
             steps {
-                echo 'This is a minimal pipeline.'
+                sh 'mvn install -DskipTests' 
+            }
+            post {
+                success {
+                    junit 'target/surefire-reports/**/*.xml' 
+                }
+            }
+        }
+        
+        stage ('FOSSA') {
+            steps {
+                sh 'fossa' 
             }
         }
     }
