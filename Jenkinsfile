@@ -3,7 +3,6 @@ pipeline {
     
     tools { 
         maven 'm3' 
-        jdk 'jdk10'
     }
     
     stages {
