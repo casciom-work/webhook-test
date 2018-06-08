@@ -1,10 +1,11 @@
 pipeline {
     agent any
+    
     tools { 
         maven 'm3' 
         jdk 'jdk10'
-        fossa 'fossa'
     }
+    
     stages {
         stage ('Initialize') {
             steps {
@@ -23,12 +24,6 @@ pipeline {
                 success {
                     junit 'target/surefire-reports/**/*.xml' 
                 }
-            }
-        }
-        
-        stage ('FOSSA') {
-            steps {
-                sh 'fossa' 
             }
         }
     }
