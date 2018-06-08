@@ -15,7 +15,7 @@ pipeline {
                     echo "JAVA_HOME = ${JAVA_HOME}"
                     ls $JAVA_HOME/bin/java
                     which java
-                    java -v
+                    java -version
                 ''' 
             }
         }
