@@ -13,7 +13,9 @@ pipeline {
 
         stage ('Build') {
             steps {
-                withEnv(["JAVA_HOME=/usr/bin/", "PATH+MAVEN=${tool 'maven3'}/bin:${env.JAVA_HOME}/bin"]) {
+                withEnv(["JAVA_HOME=${tool 'jdk8'}", "PATH+MAVEN=${tool 'maven3'}/bin:${env.JAVA_HOME}/bin"]) {
+                    sh "ls /tmp/jenkins/tools/hudson.model.JDK/jdk8/bin/"
+                    sh "/tmp/jenkins/tools/hudson.model.JDK/jdk8/bin/java -version"
                     sh "mvn --batch-mode -V -U -e install -DskipTests -Dsurefire.useFile=false"
                 }
             }
