@@ -13,8 +13,8 @@ pipeline {
 
         stage ('Build') {
             steps {
-                withMaven(maven : 'm3') {
-                    sh 'mvn install -DskipTests'
+                withEnv(["JAVA_HOME=${ tool 'jdk10' }", "PATH+MAVEN=${tool 'maven3'}/bin:${env.JAVA_HOME}/bin"]) {
+                    sh "mvn --batch-mode -V -U -e install -DskipTests -Dsurefire.useFile=false"
                 }
             }
             post {
