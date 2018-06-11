@@ -15,7 +15,7 @@ pipeline {
             steps {
                 withEnv(["JAVA_HOME=${ tool 'jdk8' }", "PATH+MAVEN=${tool 'maven3'}/bin:${env.JAVA_HOME}/bin"]) {
                     sh "which java"
-                    sh "${which java} -version"
+                    sh "java -version"
                     sh "mvn --batch-mode -V -U -e install -DskipTests -Dsurefire.useFile=false"
                 }
             }
